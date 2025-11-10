@@ -1,0 +1,362 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    /* Global Styles */
+    body {
+        font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        color: #222;
+        background-color: #f7f7f7;
+        padding-bottom: 2rem;
+    }
+    
+    /* Header Styles */
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 5%;
+        margin-bottom: 1rem;
+        background: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .create-btn {
+        background: linear-gradient(to right, #E61E4D, #D70666);
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+    }
+    
+    .create-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    /* Filters Section */
+    .filters-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin: 1.5rem 5%;
+        padding: 1rem 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    
+    .filters-container::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .filter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 70px;
+        padding: 0.5rem;
+        border-radius: 12px;
+        border: 1px solid #dddddd;
+        background: white;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .filter:hover {
+        border-color: #000;
+        transform: translateY(-2px);
+    }
+    
+    .filter.active {
+        border-color: #000;
+        background-color: #f7f7f7;
+    }
+    
+    .filter i {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .filter p {
+        font-size: 0.75rem;
+        text-align: center;
+        font-weight: 500;
+        margin: 0;
+    }
+    
+    .tax-toggle {
+        display: flex;
+        align-items: center;
+        padding: 0.8rem 1.2rem;
+        border-radius: 12px;
+        border: 1px solid #dddddd;
+        background: white;
+        margin-left: auto;
+    }
+    
+    .form-check-label {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    /* Listings Grid */
+    .listings-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 2rem 5%;
+    }
+    
+    .listing-card {
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.2s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        background: white;
+    }
+    
+    .listing-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+    }
+    
+    .card-img-container {
+        height: 250px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .card-img-top {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .listing-card:hover .card-img-top {
+        transform: scale(1.05);
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .card-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .card-price {
+        font-weight: 500;
+        color: #222;
+    }
+    
+    .tax-info {
+        color: #717171;
+        font-size: 0.9rem;
+        display: none;
+    }
+    
+    /* Search Results */
+    .search-results {
+        text-align: center;
+        margin: 2rem 5%;
+        padding: 1.5rem;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+        .listings-grid {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        }
+    }
+    
+    @media (max-width: 992px) {
+        .page-header, .filters-container {
+            margin-left: 3%;
+            margin-right: 3%;
+        }
+        
+        .listings-grid {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            margin-left: 3%;
+            margin-right: 3%;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .page-header {
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+        }
+        
+        .filters-container {
+            gap: 0.8rem;
+            padding-bottom: 1rem;
+        }
+        
+        .filter {
+            min-width: 65px;
+        }
+        
+        .listings-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .page-header, .filters-container {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+        
+        .listings-grid {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+        
+        .filter {
+            min-width: 60px;
+        }
+        
+        .filter i {
+            font-size: 1.1rem;
+        }
+        
+        .filter p {
+            font-size: 0.7rem;
+        }
+    }
+</style>
+
+<body>
+    <!-- <div class="page-header">
+        <h2>Discover Amazing Places</h2>
+        <form method="GET" action="/listing/new">
+            <button class="create-btn">+ Create New Listing</button>
+        </form>
+    </div> -->
+
+    <div class="filters-container">
+        <div class="filter active" data-filter="all">
+            <i class="fa-solid fa-globe"></i>
+            <p>All</p>
+        </div>
+        <div class="filter" data-filter="trending">
+            <i class="fa-solid fa-fire"></i>
+            <p>Trending</p>
+        </div>
+        <div class="filter" data-filter="beach">
+            <i class="fa-solid fa-umbrella-beach"></i>
+            <p>Beach</p>
+        </div>
+        <div class="filter" data-filter="mountain">
+            <i class="fa-solid fa-mountain"></i>
+            <p>Mountains</p>
+        </div>
+        <div class="filter" data-filter="luxury">
+            <i class="fa-solid fa-crown"></i>
+            <p>Luxury</p>
+        </div>
+        <div class="filter" data-filter="historic">
+            <i class="fa-solid fa-landmark"></i>
+            <p>Historic</p>
+        </div>
+        <div class="filter" data-filter="amazing-views">
+            <i class="fa-solid fa-binoculars"></i>
+            <p>Amazing Views</p>
+        </div>
+        <div class="filter" data-filter="pool">
+            <i class="fa-solid fa-water-ladder"></i>
+            <p>Pool</p>
+        </div>
+        <div class="filter" data-filter="pet-friendly">
+            <i class="fa-solid fa-paw"></i>
+            <p>Pet Friendly</p>
+        </div>
+        <div class="filter" data-filter="countryside">
+            <i class="fa-solid fa-tree"></i>
+            <p>Countryside</p>
+        </div>
+        <div class="filter" data-filter="skiing">
+            <i class="fa-solid fa-person-skiing"></i>
+            <p>Skiing</p>
+        </div>
+        <div class="filter" data-filter="island">
+            <i class="fa-solid fa-water"></i>
+            <p>Island</p>
+        </div>
+        <div class="filter" data-filter="lake">
+            <i class="fa-solid fa-sailboat"></i>
+            <p>Lake</p>
+        </div>
+        
+        <div class="tax-toggle">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="taxToggle">
+                <label class="form-check-label" for="taxToggle">Show prices with tax</label>
+            </div>
+        </div>
+    </div>
+
+    <% if (query) { %>
+        <div class="search-results">
+            <h4>Search results for "<%= query %>"</h4>
+            <% if (allListing.length === 0) { %>
+                <p class="mt-2">No matching listings found. Try different search terms.</p>
+            <% } %>
+        </div>
+    <% } %>
+    
+    <div class="listings-grid">
+        <% for(let listing of allListing) { %>
+            <a href="/listing/<%=listing._id%>"  style="text-decoration: none; color: black;" class="listing-card">
+                <div class="card-img-container">
+                    <img src="<%=listing.image.url%>" class="card-img-top" alt="<%= listing.title%>">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><%= listing.title%></h5>
+                    <p class="card-price">
+                        ₹<%=listing.price%> / night
+                        <span class="tax-info">(₹<%= Math.round(listing.price * 0.18) %> taxes)</span>
+                    </p>
+                </div>
+            </a>
+        <% } %>
+    </div>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const taxToggle = document.getElementById('taxToggle');
+        const taxInfoElements = document.querySelectorAll('.tax-info');
+        
+        taxToggle.addEventListener('change', function() {
+            taxInfoElements.forEach(info => {
+                info.style.display = this.checked ? 'inline' : 'none';
+            });
+        });
+        const filterPills = document.querySelectorAll('.filter');
+        
+        filterPills.forEach(pill => {
+            pill.addEventListener('click', function() {
+                filterPills.forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+                const filterType = this.getAttribute('data-filter');
+                console.log('Filtering by:', filterType);
+            });
+        });
+    });
+</script>
