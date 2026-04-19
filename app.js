@@ -4,10 +4,10 @@ require('dotenv').config();
 console.log(process.env.CLOUD_API_SECRET)
 const express = require("express")
 const app = express();
-const mongoose = require("mongoose")
+const mongoose =   require("mongoose")
 const path = require("path");
-// const mongourl = "mongodb://127.0.0.1:27017/wanderlust";
-const dbUrl = process.env.ATLASDB_URL;
+const mongourl = "mongodb://127.0.0.1:27017/wanderlust";
+// const dbUrl = process.env.ATLASDB_URL;
 const methodOverride = require("method-override")
 const ejsMate = require("ejs-mate");
 app.set("view engine","ejs");
@@ -26,20 +26,21 @@ const passport= require("passport");
 const Localstrategy = require("passport-local");
 const User = require("./models/user.js");
 const ExpressError = require("./utils/ExpressError.js")
-const store = MongoStore.create({
-    mongoUrl: dbUrl,
-    crypto:{
-        secret: "mysupersecretstring",
-    },
-    touchAfter: 24 * 3600,
-});
 
-store.on("error", () =>{
-    console.log("ERROR in MONGO SESSION STORE", err)
-})
+// const store = MongoStore.create({
+//     mongoUrl: dbUrl,
+//     crypto:{
+//         secret: "mysupersecretstring",
+//     },
+//     touchAfter: 24 * 3600,
+// });
+
+// store.on("error", () =>{
+//     console.log("ERROR in MONGO SESSION STORE", err)
+// })
 
 const sessionOptions = { 
-    store,
+    // store,
     secret:"mysupersecretstring",
     resave: false,
     saveUninitialized: true,
@@ -58,7 +59,7 @@ main()
 })
 
 async function main(){
-    await mongoose.connect(dbUrl);
+    await mongoose.connect(mongourl);
 }
 
 // app.get("/",(req,res)=>{

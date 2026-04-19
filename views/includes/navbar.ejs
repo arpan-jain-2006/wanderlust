@@ -1,104 +1,609 @@
-
 <style>
-/* .btn-search{
-  background-color: #fe424d !important;
-  color: white !important;
-  border-radius: 25px;
-  padding-left: 0 1rem 0 1rem;
-}
-.btn-search i{
-  display: inline;
-  margin-right: 0.5rem;
-} */
-
- .navbar {
-  /* background: linear-gradient(90deg, #fff 0%, #f8f9fa 100%); */
-  /* background: linear-gradient(90deg, #e3f2fd 0%, #bbdefb 100%); */
-  background: linear-gradient(90deg, #ff6b6b, #ffe66d);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.navbar-brand i {
-  font-size: 2rem;
-  color: #fe424d;
-}
-
-.nav-link {
-  color: #333 !important;
-  font-weight: 600;
-  margin-right: 1rem;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: forestgreen !important;
-}
-
-.btn-search {
-  background-color: #fe424d !important;
-  color: white !important;
-  border-radius: 25px;
-  padding: 0.4rem 1rem;
-  font-weight: 500;
-  box-shadow: 0 2px 6px rgba(254, 66, 77, 0.3);
-  transition: background-color 0.3s ease;
-}
-
-.btn-search:hover {
-  background-color: #e63b45 !important;
-}
-
-.btn-search i {
-  margin-right: 0.5rem;
-}
-
+    /* ========== PREMIUM NAVBAR - FULLY ANIMATED ========== */
+    .navbar {
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(16px);
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif;
+        transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+        padding: 0.8rem 1.5rem;
+        border-bottom: 1px solid rgba(230, 30, 77, 0.08);
+    }
+    
+    /* Scroll effect - navbar shrinks */
+    .navbar.scrolled {
+        padding: 0.5rem 1.5rem;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Brand Logo with animation */
+    .navbar-brand {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .navbar-brand i {
+        font-size: 2.2rem;
+        background: linear-gradient(135deg, #E61E4D, #ff6b6b, #E61E4D);
+        background-size: 200% auto;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+        display: inline-block;
+    }
+    
+    .navbar-brand:hover i {
+        transform: rotate(15deg) scale(1.1);
+        animation: brandGlow 0.5s ease;
+    }
+    
+    @keyframes brandGlow {
+        0% { filter: drop-shadow(0 0 0px rgba(230, 30, 77, 0)); }
+        50% { filter: drop-shadow(0 0 12px rgba(230, 30, 77, 0.6)); }
+        100% { filter: drop-shadow(0 0 0px rgba(230, 30, 77, 0)); }
+    }
+    
+    /* Add brand text for premium feel */
+    .navbar-brand::after {
+        content: 'stayvista';
+        position: absolute;
+        left: 2.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 800;
+        font-size: 1.2rem;
+        background: linear-gradient(135deg, #1a1a2e, #E61E4D);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        letter-spacing: -0.5px;
+        opacity: 0;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+    
+    .navbar-brand:hover::after {
+        opacity: 1;
+        left: 2.8rem;
+    }
+    
+    /* Nav Links - Premium Animated Underline */
+    .nav-link {
+        color: #2c3e50 !important;
+        font-weight: 600;
+        margin: 0 0.8rem;
+        transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+        position: relative;
+        padding: 0.5rem 0;
+        font-size: 0.95rem;
+    }
+    
+    .nav-link::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2.5px;
+        background: linear-gradient(90deg, #E61E4D, #ff6b6b);
+        border-radius: 4px;
+        transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+        transform: translateX(-50%);
+    }
+    
+    .nav-link:hover::before {
+        width: 80%;
+    }
+    
+    .nav-link:hover {
+        color: #E61E4D !important;
+        transform: translateY(-2px);
+    }
+    
+    /* Special "Airbnb Your Home" button style */
+    .nav-link.special-link {
+        background: linear-gradient(135deg, #fff5f5, #ffffff);
+        border-radius: 40px;
+        padding: 0.45rem 1.3rem !important;
+        margin: 0 0.3rem;
+        border: 1.5px solid rgba(230, 30, 77, 0.2);
+        transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .special-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(230, 30, 77, 0.15), transparent);
+        transition: left 0.5s;
+    }
+    
+    .special-link:hover::before {
+        left: 100%;
+    }
+    
+    .special-link:hover {
+        background: linear-gradient(135deg, #E61E4D, #ff6b6b);
+        color: white !important;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(230, 30, 77, 0.3);
+        border-color: transparent;
+    }
+    
+    .special-link:hover::before {
+        display: none;
+    }
+    
+    /* Auth Buttons */
+    .auth-btn {
+        border-radius: 40px !important;
+        padding: 0.45rem 1.2rem !important;
+        background: transparent;
+        border: 1.5px solid #e2e8f0;
+        transition: all 0.3s ease;
+        margin-left: 0.4rem;
+    }
+    
+    .auth-btn:hover {
+        border-color: #E61E4D;
+        background: rgba(230, 30, 77, 0.05);
+        transform: translateY(-2px);
+    }
+    
+    .logout-btn {
+        background: rgba(230, 30, 77, 0.08);
+        border-radius: 40px;
+        padding: 0.45rem 1.2rem !important;
+    }
+    
+    .logout-btn:hover {
+        background: #E61E4D;
+        color: white !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(230, 30, 77, 0.3);
+    }
+    
+    /* ========== SEARCH FORM - MODERN GLASS ========== */
+    .search-wrapper {
+        position: relative;
+        margin-right: 0.5rem;
+    }
+    
+    .search-input {
+        border-radius: 60px;
+        border: 1.5px solid #e9ecef;
+        background: #ffffff;
+        padding: 0.55rem 1.2rem 0.55rem 2.8rem;
+        font-size: 0.9rem;
+        width: 260px;
+        transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+        font-weight: 500;
+    }
+    
+    .search-input:focus {
+        border-color: #E61E4D;
+        box-shadow: 0 0 0 4px rgba(230, 30, 77, 0.12);
+        outline: none;
+        width: 300px;
+    }
+    
+    .search-icon {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #adb5bd;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        pointer-events: none;
+    }
+    
+    .search-wrapper:focus-within .search-icon {
+        color: #E61E4D;
+        transform: translateY(-50%) scale(1.1);
+    }
+    
+    .btn-search {
+        background: linear-gradient(135deg, #E61E4D, #ff6b6b);
+        border: none;
+        border-radius: 60px;
+        padding: 0.55rem 1.6rem;
+        font-weight: 700;
+        font-size: 0.85rem;
+        color: white !important;
+        transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+        box-shadow: 0 4px 12px rgba(230, 30, 77, 0.3);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn-search::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.5s, height 0.5s;
+    }
+    
+    .btn-search:hover::before {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .btn-search:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(230, 30, 77, 0.4);
+        background: linear-gradient(135deg, #ff3366, #E61E4D);
+    }
+    
+    .btn-search:active {
+        transform: translateY(1px);
+    }
+    
+    .btn-search i {
+        font-size: 0.85rem;
+        transition: transform 0.2s;
+    }
+    
+    .btn-search:hover i {
+        transform: translateX(3px);
+    }
+    
+    /* ========== NAVBAR TOGGLER ANIMATION ========== */
+    .navbar-toggler {
+        border: none;
+        padding: 0.5rem;
+        transition: all 0.3s;
+    }
+    
+    .navbar-toggler:focus {
+        box-shadow: 0 0 0 3px rgba(230, 30, 77, 0.25);
+        outline: none;
+    }
+    
+    .navbar-toggler .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(230, 30, 77, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        transition: transform 0.3s;
+    }
+    
+    .navbar-toggler:hover .navbar-toggler-icon {
+        transform: rotate(90deg);
+    }
+    
+    /* ========== DROPDOWN MENU ANIMATION ========== */
+    .dropdown-menu {
+        border-radius: 20px;
+        border: none;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        padding: 0.6rem 0;
+        margin-top: 10px;
+        animation: dropdownFade 0.25s ease-out;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(8px);
+    }
+    
+    @keyframes dropdownFade {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .dropdown-item {
+        padding: 0.6rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.25s;
+    }
+    
+    .dropdown-item:hover {
+        background: linear-gradient(90deg, rgba(230, 30, 77, 0.08), rgba(230, 30, 77, 0.02));
+        padding-left: 2rem;
+        color: #E61E4D;
+    }
+    
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 992px) {
+        .navbar {
+            padding: 0.6rem 1rem;
+        }
+        
+        .search-input {
+            width: 200px;
+        }
+        
+        .search-input:focus {
+            width: 220px;
+        }
+        
+        .nav-link {
+            margin: 0.3rem 0;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .navbar-collapse {
+            margin-top: 1rem;
+        }
+        
+        .search-wrapper {
+            width: 100%;
+            margin-bottom: 0.8rem;
+        }
+        
+        .search-input, .search-input:focus {
+            width: 100%;
+        }
+        
+        .btn-search {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .d-flex {
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .navbar-nav.ms-auto {
+            margin-top: 0.5rem;
+        }
+        
+        .navbar-brand::after {
+            display: none;
+        }
+    }
+    
+    /* ========== ANIMATION FOR ACTIVE LINK ========== */
+    .nav-link.active {
+        color: #E61E4D !important;
+    }
+    
+    .nav-link.active::before {
+        width: 80%;
+        background: linear-gradient(90deg, #E61E4D, #ff6b6b);
+    }
+    
+    /* ========== SMOOTH SCROLL INDICATOR ========== */
+    .navbar::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #E61E4D, #ff6b6b, #ffe66d);
+        transition: width 0.4s ease;
+        pointer-events: none;
+    }
+    
+    .navbar.scrolled::after {
+        width: 100%;
+    }
 </style>
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top px-3">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="listing">
-      <i class="fa-regular fa-compass"></i>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <!-- <a class="nav-link" href="/">Home</a> -->
-        <a class="nav-link" href="/listing">Explore</a>
-      </div>
-      <div class="navbar-nav ms-auto">
-       <form class="d-flex" action="/listing" method="GET">
-  <input class="form-control me-2" name="q" type="search" placeholder="Search destination" aria-label="Search" />
-  <button class="btn btn-search" type="submit">
-    <i class="fa-solid fa-magnifying-glass"></i> Search
-  </button>
-</form>
-      </div>
+<nav class="navbar navbar-expand-md sticky-top px-3" id="premiumNavbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/listing">
+            <i class="fa-regular fa-compass"></i>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-       <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listing/new">Airbnb Your Home</a>
-        <% if(!currUser){%>
-        <a class="nav-link" href="/signup"><b>Signup</b></a>
-        <a class="nav-link" href="/login"><b>Login</b></a>
-        <%}%>
-         <% if(currUser){%>
-        <a class="nav-link" href="/logout">Logout</a>
-         <%}%>
-      </div>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+            <!-- <div class="navbar-nav"> -->
+                <!-- <a class="nav-link" href="/listing"> -->
+                    <!-- <i class="fa-regular fa-compass me-1"></i> Explore -->
+                <!-- </a> -->
+            <!-- </div> -->
+            
+            <div class="navbar-nav ms-auto">
+                <!-- 🔍 Animated Search Form -->
+                <form class="d-flex me-2" action="/listing" method="GET" style="gap: 8px;">
+                    <div class="search-wrapper">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input class="search-input" name="q" type="search" placeholder="Search destinations..." aria-label="Search" autocomplete="off">
+                    </div>
+                    <button class="btn-search" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i> Search
+                    </button>
+                </form>
+            </div>
 
-      <!-- 🔍 Search Form -->
-      <!-- <form class="d-flex" role="search" action="/search" method="GET">
-        <input
-          class="form-control me-2"
-          type="search"
-          name="query"
-          placeholder="Search Jobs..."
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form> -->
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link special-link" href="/listing/new">
+                    <i class="fa-regular fa-calendar-plus"></i> Airbnb Your Home
+                </a>
+                
+                <% if(!currUser){ %>
+                    <a class="nav-link auth-btn" href="/signup">
+                        <i class="fa-regular fa-user"></i> <b>Signup</b>
+                    </a>
+                    <a class="nav-link auth-btn" href="/login">
+                        <i class="fa-solid fa-key"></i> <b>Login</b>
+                    </a>
+                <% } %>
+                
+                <% if(currUser){ %>
+                    <div class="dropdown d-inline-block ms-1">
+                        <a class="nav-link dropdown-toggle auth-btn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-regular fa-circle-user"></i> <%= currUser.username || 'Account' %>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/profile">
+                                <i class="fa-regular fa-user me-2"></i> Profile
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item logout-btn" href="/logout">
+                                <i class="fa-solid fa-arrow-right-from-bracket me-2"></i> Logout
+                            </a></li>
+                        </ul>
+                    </div>
+                <% } %>
+            </div>
+        </div>
     </div>
-  </div>
 </nav>
+
+<script>
+    (function() {
+        // ========== NAVBAR SCROLL EFFECT ==========
+        const navbar = document.getElementById('premiumNavbar');
+        if (navbar) {
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+        
+        // ========== SEARCH INPUT ANIMATION ==========
+        const searchInput = document.querySelector('.search-input');
+        if (searchInput) {
+            searchInput.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+            searchInput.addEventListener('blur', function() {
+                this.parentElement.style.transform = '';
+            });
+        }
+        
+        // ========== ACTIVE LINK HIGHLIGHT ==========
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-link:not(.dropdown-toggle)');
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href !== '#' && currentPath === href) {
+                link.classList.add('active');
+            } else if (href === '/listing' && currentPath === '/') {
+                link.classList.add('active');
+            }
+        });
+        
+        // ========== RIPPLE EFFECT ON BUTTONS ==========
+        const buttons = document.querySelectorAll('.btn-search, .auth-btn, .special-link');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.classList.contains('dropdown-toggle')) return;
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'btnRipple 0.5s ease-out';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 500);
+            });
+        });
+        
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes btnRipple {
+                to {
+                    transform: scale(30);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // ========== TOGGLER ICON ROTATION ==========
+        const toggler = document.querySelector('.navbar-toggler');
+        if (toggler) {
+            toggler.addEventListener('click', function() {
+                const icon = this.querySelector('.navbar-toggler-icon');
+                if (icon) {
+                    icon.style.transform = 'rotate(180deg)';
+                    setTimeout(() => {
+                        icon.style.transform = '';
+                    }, 300);
+                }
+            });
+        }
+        
+        // ========== DROPDOWN HOVER ENHANCEMENT ==========
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        if (dropdownToggle && window.innerWidth > 768) {
+            dropdownToggle.addEventListener('mouseenter', function() {
+                const dropdown = new bootstrap.Dropdown(this);
+                dropdown.show();
+            });
+            dropdownToggle.addEventListener('mouseleave', function() {
+                const dropdown = bootstrap.Dropdown.getInstance(this);
+                if (dropdown) dropdown.hide();
+            });
+        }
+        
+        // ========== SEARCH BUTTON VISUAL FEEDBACK ==========
+        const searchBtn = document.querySelector('.btn-search');
+        const searchField = document.querySelector('.search-input');
+        if (searchBtn && searchField) {
+            searchBtn.addEventListener('click', function(e) {
+                if (searchField.value.trim() === "") {
+                    e.preventDefault();
+                    searchField.style.borderColor = '#E61E4D';
+                    searchField.style.boxShadow = '0 0 0 3px rgba(230, 30, 77, 0.2)';
+                    setTimeout(() => {
+                        searchField.style.borderColor = '';
+                        searchField.style.boxShadow = '';
+                    }, 800);
+                    
+                    // Show tooltip
+                    const tooltip = document.createElement('div');
+                    tooltip.textContent = '✨ Type a destination ✨';
+                    tooltip.style.position = 'absolute';
+                    tooltip.style.bottom = '-35px';
+                    tooltip.style.left = '20px';
+                    tooltip.style.background = '#E61E4D';
+                    tooltip.style.color = 'white';
+                    tooltip.style.padding = '4px 12px';
+                    tooltip.style.borderRadius = '30px';
+                    tooltip.style.fontSize = '0.7rem';
+                    tooltip.style.fontWeight = '600';
+                    tooltip.style.zIndex = '100';
+                    tooltip.style.whiteSpace = 'nowrap';
+                    const wrapper = searchField.parentElement;
+                    wrapper.style.position = 'relative';
+                    const existing = wrapper.querySelector('.search-tooltip');
+                    if (existing) existing.remove();
+                    tooltip.classList.add('search-tooltip');
+                    wrapper.appendChild(tooltip);
+                    setTimeout(() => tooltip.remove(), 1500);
+                }
+            });
+        }
+    })();
+</script>
